@@ -19,8 +19,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone_number')->nullable();
+            $table->string('balance')->default(0);
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_staff')->default(false);
+            $table->boolean('is_affiliate')->default(false);
+            $table->boolean('two_factor')->default(false);
+            $table->longText('google2fa_secret')->nullable();
+            $table->longText('recovery_code')->nullable();
             $table->string('staff_role')->nullable();
             $table->string('role')->default('user');
             $table->boolean('is_active')->default(true);

@@ -14,13 +14,14 @@
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>{{ $pageName }} | {{ $siteName }}</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('dashboard/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset($web->favicon) }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -102,14 +103,15 @@
                 <p class="mb-6">Please sign-in to your account</p>
 
                 <form id="formAuthentication" class="mb-6" action="{{ route('login.process') }}" method="POST">
+                    @csrf
                     <div class="mb-6">
                         <label for="email" class="form-label">Email or Phone</label>
                         <input
                             type="text"
                             class="form-control"
                             id="email"
-                            name="email-username"
-                            placeholder="Enter your email or username"
+                            name="email-phone"
+                            placeholder="Enter your email or phone"
                             autofocus />
                     </div>
                     <div class="mb-6 form-password-toggle">
@@ -125,10 +127,21 @@
                             <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                         </div>
                     </div>
+                    <div class="mb-6">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label" for="repeatPassword">ReCaptcha:</label>
+                                <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_SITE_KEY') }}"></div>
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                     <div class="my-8">
                         <div class="d-flex justify-content-between">
                             <div class="form-check mb-0 ms-2">
-                                <input class="form-check-input" type="checkbox" id="remember-me" />
+                                <input class="form-check-input" type="checkbox" id="remember-me" name="remember"/>
                                 <label class="form-check-label" for="remember-me"> Remember Me </label>
                             </div>
                             <a href="{{ route('account-recovery') }}">
@@ -136,7 +149,7 @@
                             </a>
                         </div>
                     </div>
-                    <button class="btn btn-primary d-grid w-100">Sign in</button>
+                    <button class="btn btn-primary d-grid w-100 submit">Sign in</button>
                 </form>
 
                 <p class="text-center">
@@ -198,6 +211,7 @@
 <!-- Main JS -->
 <script src="{{ asset('dashboard/js/main.js') }}"></script>
 @include('general_js')
+<script src="{{ asset('dashboard/requests/auth/login.js') }}"></script>
 
 </body>
 </html>

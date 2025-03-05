@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('favicon')->nullable();
             $table->boolean('oem_registration')->default(true);
             $table->boolean('engineer_registration')->default(true);
+            $table->boolean('customer_registration')->default(true);
+            $table->boolean('affiliate_registration')->default(true);
             $table->boolean('online_checkout')->default(true);
             $table->boolean('maintenance_mode')->default(false);
             $table->timestamps();

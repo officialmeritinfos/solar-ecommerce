@@ -208,7 +208,7 @@
 <script src="{{ asset('dashboard/vendor/libs/typeahead-js/typeahead.js' ) }}"></script>
 <script src="{{ asset('dashboard/vendor/js/menu.js' ) }}"></script>
 @include('general_js')
-<script src="{{ asset('dashboard/requests/register.js') }}"></script>
+<script src="{{ asset('dashboard/requests/auth/register.js') }}"></script>
 
 <!-- endbuild -->
 

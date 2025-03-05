@@ -3,15 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\GenerateRecoveryCode;
 use App\GeneratesUniqueId;
+use App\UserTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, GeneratesUniqueId;
+    use HasFactory, Notifiable, GeneratesUniqueId, GenerateRecoveryCode,UserTrait;
 
     protected $guarded = [];
 
@@ -38,6 +42,22 @@ class User extends Authenticatable
         ];
     }
 
+    protected function google2faSecret(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) =>  decrypt($value),
+            set: fn ($value) =>  encrypt($value),
+        );
+    }
+
+    protected function recoveryCode(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => Crypt::decryptString($value),
+            set: fn ($value) => Crypt::encryptString($value),
+        );
+    }
+
     /**
      * Boot method to automatically generate `user_reference` on creation.
      */
@@ -47,6 +67,7 @@ class User extends Authenticatable
 
         static::creating(function ($user) {
             $user->user_reference = $user->generateUniqueId('users', 'user_reference', 7);
+            $user->recovery_code = $user->generateRecoveryCode();
         });
     }
 }

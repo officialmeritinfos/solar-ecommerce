@@ -47,16 +47,6 @@ const registerRequest=function (){
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-
-                    Swal.fire({
-                        text: jqXHR.responseJSON.data.error,
-                        icon: "error",
-                        customClass: {
-                            confirmButton: "btn btn-danger waves-effect waves-light",
-                        },
-                        position: "top-end"
-                    });
-
                     // Re-enable form inputs and hide loading overlay
                     $("#formAuthentication :input").prop("readonly", false);
 
@@ -64,6 +54,26 @@ const registerRequest=function (){
                     $(".submit").LoadingOverlay("hide");
 
                     grecaptcha.reset();
+
+                    let errorMessage = "An unexpected error occurred. Please try again.";
+
+                    // Handle Laravel validation errors (structured JSON response)
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.data && jqXHR.responseJSON.data.error) {
+                        errorMessage = jqXHR.responseJSON.data.error;
+                    }
+                    // Handle unknown errors (fallback for anything else)
+                    else if (jqXHR.responseText) {
+                        errorMessage = jqXHR.responseText.trim();
+                    }
+
+                    Swal.fire({
+                        text: errorMessage,
+                        icon: "error",
+                        customClass: {
+                            confirmButton: "btn btn-danger waves-effect waves-light",
+                        },
+                        position: "top-end"
+                    });
                 }
 
             });

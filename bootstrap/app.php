@@ -11,13 +11,32 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function (){
-            Route::middleware('web')
+            Route::middleware(['web'])
                 ->prefix('auth')
                 ->group(base_path('routes/auth.php'));
+            //Admin route
+            Route::middleware(['web','auth','auth.session','isAdmin'])
+                ->prefix('modacore')
+                ->name('admin.')
+                ->group(base_path('routes/admin.php'));
+            //User route
+            Route::middleware(['web','auth','auth.session'])
+                ->prefix('user')
+                ->name('user.')
+                ->group(base_path('routes/user.php'));
+            //Affiliate route
+            Route::middleware(['web','auth','auth.session','isAffiliate'])
+                ->prefix('affiliate')
+                ->name('affiliate.')
+                ->group(base_path('routes/affiliate.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        $middleware->alias([
+            'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
+            'isAffiliate' => \App\Http\Middleware\AffiliateMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
