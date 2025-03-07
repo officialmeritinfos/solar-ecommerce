@@ -11,7 +11,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('login','showLoginForm')->name('login');
     Route::post('login/process','login')->name('login.process')->middleware('throttle:authentication');
     //Logout
-    Route::get('logout','logout')->name('logout')->middleware(['web', 'auth'])->name('logout');
+    Route::get('logout','logout')->name('logout')->middleware(['web', 'auth']);
 });
 /*==================== TWO-FACTOR CONTROLLER=========================================*/
 Route::controller(TwoFactorController::class)->group(function () {

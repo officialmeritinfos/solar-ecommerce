@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Crypt;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, GeneratesUniqueId, GenerateRecoveryCode,UserTrait;
+    use HasFactory, Notifiable, GeneratesUniqueId, GenerateRecoveryCode,UserTrait, HasRoles;
 
     protected $guarded = [];
 

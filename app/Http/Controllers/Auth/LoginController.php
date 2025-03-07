@@ -111,6 +111,9 @@ class LoginController extends BaseController
             // Login the user and persist the session based on the "remember me" checkbox
             Auth::login($user, $request->filled('remember'));
 
+            //assign role to user
+            $user->assignRole($user->role);
+
             // Send login attempt notification to the user
             $user->sendLoginNotification($request);
 

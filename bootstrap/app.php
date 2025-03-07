@@ -36,6 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
             'isAffiliate' => \App\Http\Middleware\AffiliateMiddleware::class,
+            'hasPermission'=>\App\Http\Middleware\PermissionMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

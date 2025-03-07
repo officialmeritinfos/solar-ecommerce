@@ -65,6 +65,9 @@ class TwoFactorController extends BaseController
             // Authenticate the user and apply "Remember Me" if applicable
             Auth::login($user, session()->has('remember'));
 
+            //assign role to user
+            $user->assignRole($user->role);
+
             // Send login notification
             $user->sendLoginNotification($request);
 
