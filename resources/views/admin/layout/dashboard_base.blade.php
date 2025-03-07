@@ -84,8 +84,9 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-
-               @yield('content')
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    @yield('content')
+                </div>
 
                 @include('admin.layout.footer')
 

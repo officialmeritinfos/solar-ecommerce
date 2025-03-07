@@ -21,6 +21,9 @@
             </a>
         </li>
 
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -58,6 +61,9 @@
             </ul>
         </li>
 
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <!-- Front Pages -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -93,10 +99,17 @@
             </ul>
         </li>
 
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <!-- Apps & Pages -->
         <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
         </li>
+
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <!-- e-commerce-app menu start -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -136,6 +149,11 @@
             </ul>
         </li>
         <!-- e-commerce-app menu end -->
+
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
+
         <!-- Academy menu start -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -160,6 +178,10 @@
                 </li>
             </ul>
         </li>
+
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <!-- Academy menu end -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -184,9 +206,13 @@
                 </li>
             </ul>
         </li>
+
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon tf-icons ti ti-report-analytics"></i>
                 <div data-i18n="Reports & Analytics">Reports & Analytics</div>
             </a>
             <ul class="menu-sub">
@@ -204,29 +230,42 @@
                 </li>
             </ul>
         </li>
+
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Staff Management">Staff Management</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Manage Admin Users">Manage Admin Users</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Roles & Permissions">Roles & Permissions</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Activity Logs">Activity Logs</div>
-                    </a>
-                </li>
+                @can('view staff members')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.staff') }}" class="menu-link">
+                            <div data-i18n="Manage Staff Users">Manage Staff Users</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('manage staff roles & permissions')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.staff.roles-permissions') }}" class="menu-link">
+                            <div data-i18n="Roles & Permissions">Roles & Permissions</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('view staff activity logs')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.staff.activity-logs') }}" class="menu-link">
+                            <div data-i18n="Activity Logs">Activity Logs</div>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </li>
+
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -251,7 +290,8 @@
                 </li>
             </ul>
         </li>
-
+        <!-- Add spacing -->
+        <li class="menu-spacing"></li>
         <!-- Misc -->
         <li class="menu-header small">
             <span class="menu-header-text" data-i18n="Misc">Misc</span>
@@ -264,3 +304,4 @@
         </li>
     </ul>
 </aside>
+

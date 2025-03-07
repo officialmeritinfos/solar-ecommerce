@@ -71,4 +71,9 @@ class User extends Authenticatable
             $user->recovery_code = $user->generateRecoveryCode();
         });
     }
+    public function activityLogs()
+    {
+        return $this->hasMany(StaffActivityLog::class);
+    }
+
 }
