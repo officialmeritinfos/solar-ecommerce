@@ -241,6 +241,46 @@
 
         </div>
 
+        <!-- Recent Devices -->
+        <div class="card mb-6 mt-5">
+            <h5 class="card-header">Recent Devices</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-truncate">Browser</th>
+                        <th class="text-truncate">Device</th>
+                        <th class="text-truncate">IP Address</th>
+                        <th class="text-truncate">Location</th>
+                        <th class="text-truncate">Last Activities</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($sessions as $session)
+                        <tr class="{{ $session->id==$currentSession ? 'table-success' : 'table-danger' }}">
+                            <td class="text-truncate">
+                                <i class="ti ti-brand-windows ti-md align-top text-info me-2"></i>
+                                {{ getUserBrowser($session->user_agent) }} on {{ getUserPlatform($session->user_agent) }}
+                            </td>
+                            <td class="text-truncate">
+                                {{ getUserDevice($session->user_agent) }}
+                            </td>
+                            <td class="text-truncate">{{ $session->ip_address }}</td>
+                            <td class="text-truncate">{{ getUserLocation($session->ip_address) }}</td>
+                            <td class="text-truncate">
+                                {{ \Carbon\Carbon::createFromTimestamp($session->last_activity)->diffForHumans() }}
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="mx-3 mt-5">
+                    {{ $sessions->links() }}
+                </div>
+            </div>
+        </div>
+        <!--/ Recent Devices -->
+
 
         <!-- Modal -->
         <!-- Enable OTP Modal -->
@@ -294,8 +334,7 @@
             </div>
         </div>
         <!--/ Enable OTP Modal -->
-
-        <!-- /Modal -->
+    </div>
 
 
     @push('js')

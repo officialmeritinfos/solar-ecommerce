@@ -58,12 +58,22 @@ class AccountSettingsController extends BaseController
             );
         }
 
+        //current session
+        $currentSession = session()->getId();
+
+
+
         return view('admin.settings.account.security')->with([
             'pageName' => 'Account Security Settings',
             'siteName' => GeneralSetting::first()->name,
             'web'      => GeneralSetting::first(),
             'user'     => $this->user,
             'QR_Image' => $QR_Image,
+            'currentSession' => $currentSession,
+            'sessions' => $sessions = DB::table('sessions')
+                ->where('user_id', $this->user->id)
+                ->orderByRaw("CASE WHEN id = ? THEN 0 ELSE 1 END, last_activity DESC", [$currentSession])
+                ->paginate(10),
         ]);
     }
 

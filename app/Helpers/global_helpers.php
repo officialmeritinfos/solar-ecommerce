@@ -102,3 +102,109 @@ if (!function_exists('format_code')) {
         return implode(' ', $chunks);
     }
 }
+
+if (!function_exists('getUserLocation')) {
+    /**
+     * Get user's location based on IP address using torann/geoip.
+     *
+     * @param string|null $ip
+     * @return string
+     */
+    function getUserLocation($ip = null)
+    {
+        if (!$ip) return 'Unknown';
+
+        try {
+            $geo = \geoip()->getLocation($ip);
+            $location = $geo['city'] . ', ' . $geo['country'];
+        } catch (\Exception $e) {
+            $location = "Unknown Location";
+        }
+
+        return $location;
+    }
+}
+
+if (!function_exists('getUserDeviceType')) {
+    /**
+     * Get user's device type from user agent string using jenssegers/agent.
+     *
+     * @param string|null $userAgent
+     * @return string
+     */
+    function getUserDeviceType($userAgent = null)
+    {
+        if (!$userAgent) return 'Unknown Device Type';
+
+        $agent = new Jenssegers\Agent\Agent();
+
+        $agent->setUserAgent($userAgent);
+
+
+        return ucfirst($agent->deviceType());
+    }
+}
+if (!function_exists('getUserDevice')) {
+    /**
+     * Get user's device from user agent string using jenssegers/agent.
+     *
+     * @param string|null $userAgent
+     * @return string
+     */
+    function getUserDevice($userAgent = null)
+    {
+        if (!$userAgent) return 'Unknown Device';
+
+        $agent = new Jenssegers\Agent\Agent();
+
+        $agent->setUserAgent($userAgent);
+
+        if ($agent->isDesktop()) {
+            return 'Desktop';
+        }elseif ($agent->isMobile()) {
+            return 'Mobile';
+        }elseif ($agent->isTablet()) {
+            return 'Tablet';
+        }
+        else{
+            return 'Unknown';
+        }
+    }
+}
+if (!function_exists('getUserPlatform')) {
+    /**
+     * Get user's platform from user agent string using jenssegers/agent.
+     *
+     * @param string|null $userAgent
+     * @return string
+     */
+    function getUserPlatform($userAgent = null)
+    {
+        if (!$userAgent) return 'Unknown Platform';
+
+        $agent = new Jenssegers\Agent\Agent();
+
+        $agent->setUserAgent($userAgent);
+
+
+        return ucfirst($agent->platform());
+    }
+}
+if (!function_exists('getUserBrowser')) {
+    /**
+     * Get user's browser type from user agent string using jenssegers/agent.
+     *
+     * @param string|null $userAgent
+     * @return string
+     */
+    function getUserBrowser($userAgent = null)
+    {
+        if (!$userAgent) return 'Unknown Browser';
+
+        $agent = new Jenssegers\Agent\Agent();
+
+        $agent->setUserAgent($userAgent);
+
+        return $agent->browser();
+    }
+}
