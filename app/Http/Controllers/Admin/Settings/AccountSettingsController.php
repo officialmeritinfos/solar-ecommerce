@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use PragmaRX\Google2FAQRCode\Google2FA;
 
 class AccountSettingsController extends BaseController
@@ -33,6 +34,53 @@ class AccountSettingsController extends BaseController
             'web'      => GeneralSetting::first(),
             'user'     => $this->user
         ]);
+    }
+    //Process acccount update
+    public function updateAccountSettings(Request $request)
+    {
+        try {
+            // Validate OTP input
+            $validator = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'max:255'],
+                'phoneNumber' => ['required','string','max:20', Rule::unique('users','phone_number')->ignore($this->user->id)],
+            ])->stopOnFirstFailure();
+
+            if ($validator->fails()) {
+                return $this->sendError('validation.error', ['error' => $validator->errors()->all()]);
+            }
+
+            //start db transaction
+            DB::beginTransaction();
+
+
+            //update the details
+            $this->user->update([
+                'name' => $request->name,
+                'phone_number' => $request->phoneNumber,
+            ]);
+
+            //Create a record of this activity
+            StaffActivityLog::create([
+                'user_id' => $this->user->id,
+                'action' => 'Account Details Updated',
+                'description' => "Updated account details for {$this->user->email}",
+                'ip' => $request->ip(),
+            ]);
+
+            DB::commit();
+
+            return $this->sendResponse([
+                'redirectTo' => url()->previous(),
+            ], 'Account Details updated successfully');
+
+        }catch (\Exception $e) {
+            //Rollback transaction if error occurs
+            DB::rollBack();
+
+            \Log::error('Account Settings Error: ' . $e->getMessage());
+
+            return $this->sendError('account.settings.error', ['error' => 'An unexpected error occurred. Please try again later.']);
+        }
     }
 
     //account security settings
@@ -119,7 +167,7 @@ class AccountSettingsController extends BaseController
             StaffActivityLog::create([
                 'user_id' => $this->user->id,
                 'action' => 'Two-factor authentication',
-                'description' => "Two-factor authentication for {$this->user->email}",
+                'description' => "Completed setup for Two-factor authentication for {$this->user->email}",
                 'ip' => $request->ip(),
             ]);
 
@@ -213,6 +261,14 @@ class AccountSettingsController extends BaseController
                 Auth::logoutOtherDevices($request->newPassword);
             }
 
+            StaffActivityLog::create([
+                'user_id' => $this->user->id,
+                'action' => 'Updated password',
+                'description' => "{$this->user->name} Updated their password",
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent()
+            ]);
+
             //commit to db
             DB::commit();
 
@@ -229,5 +285,15 @@ class AccountSettingsController extends BaseController
 
             return $this->sendError('password.error', ['error' => 'An unexpected error occurred. Please try again later.']);
         }
+    }
+    //show user profile
+    public function showProfile()
+    {
+        return view('admin.settings.account.profile')->with([
+            'pageName' => 'Account Profile',
+            'siteName' => GeneralSetting::first()->name,
+            'web'      => GeneralSetting::first(),
+            'user'     => $this->user
+        ]);
     }
 }

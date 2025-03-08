@@ -206,6 +206,7 @@
     </div>
 
     @push('js')
+        <script src="{{ asset('dashboard/requests/admin/logo-upload.js') }}"></script>
         <script src="{{ asset('dashboard/js/pages-account-settings-account.js') }}"></script>
         <script src="{{ asset('dashboard/requests/admin/general_settings.js') }}"></script>
     @endpush

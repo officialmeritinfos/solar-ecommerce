@@ -149,4 +149,55 @@ class GeneralSettingsController extends BaseController
             return $this->sendError('An unexpected error occurred. Please try again later.', [], 500);
         }
     }
+    //upload logo
+    public function uploadLogo(Request $request)
+    {
+        try {
+            $settings = GeneralSetting::first();
+
+            // Validate the uploaded file
+            $request->validate([
+                'logo' => 'required|image|mimes:jpeg,png,jpg,ico,svg|max:' . ($settings->file_upload_max_size),
+            ]);
+
+            // Handle the file upload
+            if ($request->hasFile('logo')) {
+
+                // Define the logo directory path
+                $logoPath = public_path();
+
+                // Delete old logo if exists
+                if ($settings->logo && File::exists(public_path($settings->logo))) {
+                    File::delete(public_path($settings->logo));
+                }
+
+                // Generate a unique file name
+                $logoFile = time() . '.' . $request->file('logo')->getClientOriginalExtension();
+
+                // Move the uploaded file to the `public` directory
+                $request->file('logo')->move($logoPath, $logoFile);
+
+                // Save the public path of the uploaded file
+                $settings->logo = $logoFile;
+                $settings->save();
+
+                $filePath = asset($logoFile); // Get public URL
+
+                return response()->json([
+                    'error' => 'ok',
+                    'data' => ['logo_url' => $filePath],
+                    'message' => 'Logo uploaded successfully.',
+                ]);
+            }
+
+            return response()->json(['error' => 'upload.error', 'message' => 'No file uploaded.'], 400);
+        } catch (\Exception $e) {
+            \Log::error('Logo Upload Error: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'upload.error',
+                'message' => 'An unexpected error occurred. Please try again later.',
+            ], 500);
+        }
+    }
 }

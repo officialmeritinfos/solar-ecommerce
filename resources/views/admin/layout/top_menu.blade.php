@@ -48,16 +48,16 @@
                     href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset('dashboard/img/avatars/1.png') }}" alt class="rounded-circle" />
+                        <img src="https://ui-avatars.com/api/?name={{$user->name}}&background=random" alt class="rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item mt-0" href="pages-account-settings-account">
+                        <a class="dropdown-item mt-0" href="{{ route('admin.account.profile') }}">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-2">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('dashboard/img/avatars/1.png') }}" alt class="rounded-circle" />
+                                        <img src="https://ui-avatars.com/api/?name={{$user->name}}&background=random" alt class="rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
@@ -71,12 +71,12 @@
                         <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-profile-user">
+                        <a class="dropdown-item" href="{{ route('admin.account.profile') }}">
                             <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">My Profile</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-account-settings-account">
+                        <a class="dropdown-item" href="{{ route('admin.account.settings') }}">
                             <i class="ti ti-settings me-3 ti-md"></i><span class="align-middle">Settings</span>
                         </a>
                     </li>
