@@ -177,6 +177,8 @@
                                         id="phoneNumber"
                                         name="otp"
                                         class="form-control"
+                                        minlength="6"
+                                        maxlength="6"
                                     />
                                 </div>
                             @else
