@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Changed Successfully</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Two-Factor Authentication Enabled</title>
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -14,70 +15,63 @@
         .container {
             max-width: 600px;
             margin: 20px auto;
-            background: #ffffff;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
-            color: #d9534f;
+            color: #333;
         }
-        .content {
-            margin: 20px 0;
-        }
-        .info-box {
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
+        p {
             font-size: 14px;
+            line-height: 1.6;
+            color: #555;
         }
-        .footer {
-            text-align: center;
-            font-size: 14px;
-            color: #888;
-            margin-top: 20px;
-        }
-        .btn {
+        .button {
             display: inline-block;
-            padding: 10px 15px;
-            background: #d9534f;
+            padding: 12px 20px;
+            margin: 20px 0;
+            background-color: #007bff;
             color: #ffffff;
             text-decoration: none;
+            font-size: 16px;
             border-radius: 5px;
-            margin-top: 15px;
         }
-        .btn:hover {
-            background: #c9302c;
+        .footer {
+            font-size: 12px;
+            text-align: center;
+            color: #777;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <h2>Password Changed Successfully</h2>
-    <p>Dear {{ $name }},</p>
+    <h2>Two-Factor Authentication Activated</h2>
 
-    <p>Your password has been successfully changed.</p>
+    <p>Dear {{ $user->name }},</p>
 
-    <div class="info-box">
-        <strong>IP Address:</strong> {{ $ipAddress }} <br>
-        <strong>Location:</strong> {{ $location }} <br>
-        <strong>Device:</strong> {{ $device }} <br>
-        <strong>Date & Time:</strong> {{ $dateTime }}
-    </div>
-
-    <p>If you made this change, you can ignore this email.</p>
-
-    <p>If this wasn’t you, reset your password immediately.</p>
+    <p>We wanted to let you know that **Two-Factor Authentication (2FA)** has been successfully enabled on your account.</p>
 
     <p>
-        <a href="{{ route('password.request') }}" class="btn">Reset Password</a>
+        This adds an extra layer of security, requiring a verification code from your authenticator app whenever you sign in.
     </p>
 
+    <p>If this was you, no further action is required. If you did not enable 2FA, you can disable it using the link below:</p>
+
+    <!-- Disable 2FA Signed URL -->
+    <a href="{{ $disable2FALink }}" class="button">Disable Two-Factor Authentication</a>
+
+    <p><strong>Important:</strong> This link is valid for **30 days**. If you do not take action within this period, you will need to manually disable 2FA from your account settings.</p>
+
+    <p>If you have any questions, please contact our support team.</p>
+
     <div class="footer">
-        <p>If you have any concerns, contact our support team.</p>
-        <p>&copy; {{ date('Y') }} Your Company. All rights reserved.</p>
+        <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
     </div>
 </div>
+
 </body>
 </html>

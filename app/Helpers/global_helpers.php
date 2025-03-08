@@ -40,3 +40,65 @@ if (!function_exists('mask_phone')) {
         return str_repeat('*', max(strlen($cleanPhone) - 4, 0)) . substr($cleanPhone, -4);
     }
 }
+
+if (!function_exists('getServerLimitInKB')) {
+    /**
+     * Retrieve a server's PHP configuration value (like upload_max_filesize, post_max_size,memory_limit)
+     * and convert it to kilobytes (KB).
+     *
+     * @param string $key The name of the PHP INI configuration value (e.g., 'upload_max_filesize', 'post_max_size').
+     * @return int|null The converted value in KB, or null if the configuration does not exist.
+     */
+    function getServerLimitInKB(string $key ='upload_max_filesize'): ?int
+    {
+        // Retrieve the PHP configuration value
+        $value = ini_get($key);
+
+        // If the value does not exist, return null
+        if (!$value) return null;
+
+        // Extract the unit (last character) and convert to lowercase
+        $unit = strtolower(substr($value, -1));
+
+        // Convert the numeric part of the value to an integer
+        $value = (int) $value;
+
+        // Convert the value based on its unit (K, M, G)
+        switch ($unit) {
+            case 'g': // If the unit is GB, convert to MB
+                $value *= 1024;
+            case 'm': // If the unit is MB, convert to KB
+                $value *= 1024;
+            case 'k': // If the unit is already in KB, return as is
+                return $value;
+            default:  // If the value is in bytes, convert to KB (1 KB = 1024 bytes)
+                return round($value / 1024);
+        }
+    }
+}
+
+
+if (!function_exists('format_code')) {
+    /**
+     * Format a given code by adding spaces every N characters.
+     *
+     * @param string $code The input code to be formatted.
+     * @param int $chunkSize The number of characters between spaces (default is 4).
+     * @return string The formatted code with spaces.
+     *
+     * Example Usage:
+     * format_code('WTR3AOWNUKYBXZLG');  // Output: "WTR3 AOWN UKYB XZLG"
+     * format_code('ABCDEFGH', 3);       // Output: "ABC DEF GH"
+     */
+    function format_code(string $code, int $chunkSize = 4): string
+    {
+        // Ensure the chunk size is at least 1 to avoid division errors
+        $chunkSize = max(1, $chunkSize);
+
+        // Use str_split to break the string into smaller chunks
+        $chunks = str_split($code, $chunkSize);
+
+        // Join the chunks with spaces and return the formatted string
+        return implode(' ', $chunks);
+    }
+}

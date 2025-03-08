@@ -274,7 +274,7 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.settings.general') }}" class="menu-link">
                         <div data-i18n="General Settings">General Settings</div>
                     </a>
                 </li>
@@ -283,9 +283,10 @@
                         <div data-i18n="Delivery Settings">Delivery Settings</div>
                     </a>
                 </li>
+
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Email Notifications">Email Notifications</div>
+                    <a href="{{ route('admin.account.settings') }}" class="menu-link">
+                        <div data-i18n="Account Settings">Account Settings</div>
                     </a>
                 </li>
             </ul>

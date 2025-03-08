@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('affiliate_registration')->default(true);
             $table->boolean('online_checkout')->default(true);
             $table->boolean('maintenance_mode')->default(false);
+            $table->string('file_upload_max_size')->default(1024);
             $table->timestamps();
         });
     }
