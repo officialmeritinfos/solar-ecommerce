@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\Settings\AccountSettingsController;
+use App\Http\Controllers\Admin\Settings\DeliverySettingsController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
 use \Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,9 @@ Route::controller(AccountSettingsController::class)->group(function () {
     Route::post('account/settings/security/recovery-code','getRecoveryCode')->name('account.settings.security.recovery-code');
     //Profile
     Route::get('account/profile','showProfile')->name('account.profile');
+});
+//Delivery Locations
+Route::controller(DeliverySettingsController::class)->group(function () {
+    Route::get('delivery/settings','showLocation')->name('delivery.settings');
+    Route::get('delivery/settings/{id}/locations','showSubLocation')->name('delivery.settings.subLocations');
 });

@@ -279,7 +279,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.delivery.settings') }}" class="menu-link">
                         <div data-i18n="Delivery Settings">Delivery Settings</div>
                     </a>
                 </li>
