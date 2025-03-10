@@ -76,4 +76,26 @@ class User extends Authenticatable
         return $this->hasMany(StaffActivityLog::class);
     }
 
+    public function couponUsages()
+    {
+        return $this->hasMany(CouponUsage::class);
+    }
+
+    public function affiliateEarnings()
+    {
+        return $this->hasMany(AffiliateEarning::class, 'affiliate_id');
+    }
+
+    // An affiliate can have many payout methods
+    public function payoutMethods()
+    {
+        return $this->hasMany(AffiliatePayoutMethod::class, 'user_id');
+    }
+
+    // An affiliate can have many payout requests
+    public function affiliatePayouts()
+    {
+        return $this->hasMany(AffiliatePayout::class, 'affiliate_id');
+    }
+
 }
