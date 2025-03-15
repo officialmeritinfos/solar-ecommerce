@@ -208,3 +208,15 @@ if (!function_exists('getUserBrowser')) {
         return $agent->browser();
     }
 }
+if (!function_exists('getCurrencySign')) {
+    function getCurrencySign($currency = null)
+    {
+        // If no currency is passed, use the one from General Settings
+        if (!$currency) {
+            $currency = \App\Models\GeneralSetting::first()?->currency ?? 'NGN';
+        }
+
+        // Find currency symbol from Country model
+        return \App\Models\Country::where('currency', $currency)->first()?->currency_symbol ?? '₦';
+    }
+}

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('online_checkout')->default(true);
             $table->boolean('maintenance_mode')->default(false);
             $table->string('file_upload_max_size')->default(1024);
+            $table->string('currency')->default('NGN');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\GeneralSetting;
 use App\Models\StaffActivityLog;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class GeneralSettingsController extends BaseController
             'pageName' => 'General Settings',
             'siteName' => GeneralSetting::first()->name,
             'web'      => GeneralSetting::first(),
-            'user'     => $this->user
+            'user'     => $this->user,
+            'currencies'=>Country::where('status', 1)->groupBy('currency')->orderBy('currency')->get(),
         ]);
     }
     //update general Settings
@@ -62,6 +64,7 @@ class GeneralSettingsController extends BaseController
                 'maintenance_mode' => 'sometimes|boolean',
                 'password'=>['required','string', 'min:8','current_password:web'],
                 'otp'=>['required','numeric','digits:6'],
+                'currency'=>['required','string', 'exists:countries,currency']
             ],[],[
                 'otp'=>'Two-factor authentication otp',
             ])->stopOnFirstFailure();
@@ -87,6 +90,7 @@ class GeneralSettingsController extends BaseController
             $settings->registration_number = $request->input('registrationNumber');
             $settings->file_upload_max_size = $request->input('maxFileUploadSize') * 1024; // Convert MB to KB
             $settings->address = $request->input('address');
+            $settings->currency = $request->input('currency');
 
             // Handle favicon upload in the `public` folder
             if ($request->hasFile('favicon')) {

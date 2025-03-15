@@ -66,7 +66,7 @@
                             <label for="lastName" class="form-label">Company Registration Number</label>
                             <input class="form-control" type="text" name="registrationNumber" id="lastName" value="{{ $web->registration_number }}" />
                         </div>
-                        <div class="mb-4 col-md-6">
+                        <div class="mb-4 col-md-4">
                             <label for="organization" class="form-label">Maximum File Upload (MB)</label>
                             <input
                                 type="number"
@@ -78,7 +78,19 @@
                                 Maximum file size supported on server: {{ getServerLimitInKB()/1024 }}MB
                             </small>
                         </div>
-                        <div class="mb-4 col-md-6">
+                        <div class="mb-4 col-md-4">
+                            <label for="organization" class="form-label">Currency</label>
+                            <select
+                                class="form-control"
+                                id="organization"
+                                name="currency" >
+                                <option value="">Select currency</option>
+                                @foreach($currencies as $currency)
+                                   <option value="{{ $currency->currency }}" {{ $currency->currency==$web->currency?'selected':'' }}>{{ $currency->currency }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-4 col-md-4">
                             <label for="organization" class="form-label">Site Favicon</label>
                             <input
                                 type="file"

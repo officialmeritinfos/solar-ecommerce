@@ -43,3 +43,13 @@ Route::controller(DeliverySettingsController::class)->group(function () {
     Route::get('delivery/settings','showLocation')->name('delivery.settings');
     Route::get('delivery/settings/{id}/locations','showSubLocation')->name('delivery.settings.subLocations');
 });
+
+/*======================== AFFILIATES ====================================*/
+Route::controller(\App\Http\Controllers\Admin\AffiliatesController::class)->group(function () {
+    Route::get('affiliates/show','showAffiliates')->name('affiliate.show');
+    Route::get('affiliates/earnings','affiliateEarnings')->name('affiliate.earnings');
+    Route::get('affiliates/payouts','affiliatesPayouts')->name('affiliate.payouts');
+
+    //Affiliate Details
+    Route::get('affiliates/{id}/detail','affiliatesDetails')->name('affiliates.detail');
+});

@@ -8,6 +8,7 @@ use App\GeneratesUniqueId;
 use App\UserTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Crypt;
@@ -16,7 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, GeneratesUniqueId, GenerateRecoveryCode,UserTrait, HasRoles;
+    use HasFactory, Notifiable, GeneratesUniqueId, GenerateRecoveryCode,UserTrait, HasRoles,SoftDeletes;
 
     protected $guarded = [];
 

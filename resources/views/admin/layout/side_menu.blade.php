@@ -131,17 +131,17 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.affiliate.show') }}" class="menu-link">
                         <div data-i18n="All Affiliates">All Affiliates</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.affiliate.earnings') }}" class="menu-link">
                         <div data-i18n="Affiliates Earnings">Affiliates Earnings</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.affiliate.payouts') }}" class="menu-link">
                         <div data-i18n="Payout Requests">Payouts Requests</div>
                     </a>
                 </li>
