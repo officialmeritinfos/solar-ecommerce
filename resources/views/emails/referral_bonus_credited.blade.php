@@ -42,7 +42,7 @@
                         </table>
 
                         @if (!empty($note))
-                        <p style="font-size: 14px; color: #555;"><strong>Note:</strong> {{ $note }}</p>
+                            <p style="font-size: 14px; color: #555;"><strong>Note:</strong> {{ $note }}</p>
                         @endif
 
                         <p style="font-size: 16px; margin-top: 30px;">

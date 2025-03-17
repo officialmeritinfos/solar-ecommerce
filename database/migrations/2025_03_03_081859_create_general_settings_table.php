@@ -28,6 +28,9 @@ return new class extends Migration
             $table->boolean('maintenance_mode')->default(false);
             $table->string('file_upload_max_size')->default(1024);
             $table->string('currency')->default('NGN');
+            $table->boolean('onlinePayout')->default(false);
+            $table->boolean('autoReferral')->default(false);
+            $table->string('affiliate_bonus')->default('10');
             $table->timestamps();
         });
     }

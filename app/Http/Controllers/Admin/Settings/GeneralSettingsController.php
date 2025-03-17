@@ -56,12 +56,15 @@ class GeneralSettingsController extends BaseController
                 'maxFileUploadSize' => 'required|integer|min:1|max:' . (getServerLimitInKB()/1024), // Convert to MB
                 'favicon' => 'nullable|image|mimes:jpeg,png,ico,jpeg|max:' . ($settings->file_upload_max_size), // Ensure max file size in KB
                 'address' => 'nullable|string|max:500',
+                'affiliate_bonus' => 'required|numeric|max:100',
                 'oem_registration' => 'sometimes|boolean',
                 'engineer_registration' => 'sometimes|boolean',
                 'customer_registration' => 'sometimes|boolean',
                 'affiliate_registration' => 'sometimes|boolean',
                 'online_checkout' => 'sometimes|boolean',
                 'maintenance_mode' => 'sometimes|boolean',
+                'onlinePayout' => 'sometimes|boolean',
+                'autoReferral' => 'sometimes|boolean',
                 'password'=>['required','string', 'min:8','current_password:web'],
                 'otp'=>['required','numeric','digits:6'],
                 'currency'=>['required','string', 'exists:countries,currency']
@@ -91,6 +94,7 @@ class GeneralSettingsController extends BaseController
             $settings->file_upload_max_size = $request->input('maxFileUploadSize') * 1024; // Convert MB to KB
             $settings->address = $request->input('address');
             $settings->currency = $request->input('currency');
+            $settings->affiliate_bonus = $request->input('affiliate_bonus');
 
             // Handle favicon upload in the `public` folder
             if ($request->hasFile('favicon')) {
@@ -119,6 +123,8 @@ class GeneralSettingsController extends BaseController
             $settings->affiliate_registration = $request->has('affiliate_registration') ? 1 : 0;
             $settings->online_checkout = $request->has('online_checkout') ? 1 : 0;
             $settings->maintenance_mode = $request->has('maintenance_mode') ? 1 : 0;
+            $settings->autoReferral = $request->has('autoReferral')?1:0;
+            $settings->onlinePayout = $request->has('onlinePayout')?1:0;
 
             // Save the updated settings
             $settings->save();

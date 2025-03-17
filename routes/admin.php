@@ -47,9 +47,15 @@ Route::controller(DeliverySettingsController::class)->group(function () {
 /*======================== AFFILIATES ====================================*/
 Route::controller(\App\Http\Controllers\Admin\AffiliatesController::class)->group(function () {
     Route::get('affiliates/show','showAffiliates')->name('affiliate.show');
-    Route::get('affiliates/earnings','affiliateEarnings')->name('affiliate.earnings');
-    Route::get('affiliates/payouts','affiliatesPayouts')->name('affiliate.payouts');
 
     //Affiliate Details
     Route::get('affiliates/{id}/detail','affiliatesDetails')->name('affiliates.detail');
+
+    //Earnings
+    Route::get('affiliates/earnings','affiliateEarnings')->name('affiliate.earnings');
+    Route::get('affiliates/earnings/{id}/detail','showAffiliateEarningDetails')->name('affiliates.earnings.detail');
+
+    //Payouts
+    Route::get('affiliates/payouts','affiliatesPayouts')->name('affiliate.payouts');
+    Route::get('affiliates/payouts/{id}/detail','showAffiliatePayoutRequestDetails')->name('affiliates.payouts.detail');
 });

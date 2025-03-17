@@ -25,6 +25,9 @@ return new class extends Migration
                 ->constrained('affiliate_payout_methods')
                 ->nullOnDelete();
 
+            $table->string('reference')->nullable();
+
+            $table->string('transaction_id')->nullable();
             // Amount to be paid
             $table->decimal('amount', 12, 2)->default(0.00);
 

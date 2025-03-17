@@ -220,3 +220,9 @@ if (!function_exists('getCurrencySign')) {
         return \App\Models\Country::where('currency', $currency)->first()?->currency_symbol ?? '₦';
     }
 }
+if (!function_exists('numberOfReferrals')){
+    function numberOfReferrals($id): int
+    {
+        return \App\Models\User::where('referred_by', $id)->count();
+    }
+}

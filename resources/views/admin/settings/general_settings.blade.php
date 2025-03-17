@@ -49,7 +49,7 @@
                                 value="{{ $web->support_email }}"
                                 placeholder="john.doe@example.com" />
                         </div>
-                        <div class="mb-4 col-md-6">
+                        <div class="mb-4 col-md-4">
                             <label class="form-label" for="phoneNumber">Support Phone Number</label>
                             <div class="input-group input-group-merge">
                                 <input
@@ -62,7 +62,7 @@
                                 />
                             </div>
                         </div>
-                        <div class="mb-4 col-md-6">
+                        <div class="mb-4 col-md-4">
                             <label for="lastName" class="form-label">Company Registration Number</label>
                             <input class="form-control" type="text" name="registrationNumber" id="lastName" value="{{ $web->registration_number }}" />
                         </div>
@@ -100,6 +100,16 @@
                             <small>
                                 Maximum file size supported : {{ $web->file_upload_max_size/1024 }}MB
                             </small>
+                        </div>
+
+                        <div class="mb-4 col-md-4">
+                            <label for="organization" class="form-label">Affiliate Commission (%)</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="organization"
+                                name="affiliate_bonus"
+                                value="{{ $web->affiliate_bonus }}" />
                         </div>
                         <div class="mb-4 col-md-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Company Address</label>
@@ -165,6 +175,30 @@
                                 >{{ $web->maintenance_mode?'Deactivate':'Activate' }} Maintenance Mode <i class="fa fa-info-circle"
                                     data-bs-toggle="tooltip" title="When activated, only the admin route will be active, every other
                                     route will return a HTTP 403 - maintenance mode error."></i> </label
+                                >
+                            </div>
+                        </div>
+                        <div class="mb-4 col-md-6">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="onlinePayout"
+                                name="onlinePayout" {{ ($web->onlinePayout)?'checked':'' }}
+                                value="{{ $web->onlinePayout }}"/>
+                                <label class="form-check-label" for="onlinePayout"
+                                >{{ $web->onlinePayout?'Deactivate':'Activate' }} Online Payout <i class="fa fa-info-circle"
+                                    data-bs-toggle="tooltip" title="When activated, affiliates payout requests will be processed online through the payment
+                                    processor once payout is approved."></i> </label
+                                >
+                            </div>
+                        </div>
+                        <div class="mb-4 col-md-6">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="autoReferral"
+                                name="autoReferral" {{ ($web->autoReferral)?'checked':'' }}
+                                value="{{ $web->autoReferral }}"/>
+                                <label class="form-check-label" for="autoReferral"
+                                >{{ $web->autoReferral?'Deactivate':'Activate' }} Auto Referral Commission <i class="fa fa-info-circle"
+                                    data-bs-toggle="tooltip" title="When activated, affiliates will be credited the referral commission
+                                    which has been set above automatically"></i> </label
                                 >
                             </div>
                         </div>

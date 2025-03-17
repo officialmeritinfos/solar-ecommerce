@@ -58,4 +58,14 @@ class AffiliatesController extends BaseController
             'affiliate'=> $affiliate,
         ]);
     }
+    //affiliate earning details
+    public function showAffiliateEarningDetails($id)
+    {
+
+    }
+    //affiliate payout details
+    public function showAffiliatePayoutRequestDetails($reference)
+    {
+
+    }
 }
