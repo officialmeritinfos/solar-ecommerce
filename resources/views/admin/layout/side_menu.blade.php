@@ -33,12 +33,12 @@
 
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.products.list') }}" class="menu-link">
                         <div data-i18n="Manage Products">Manage Products</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.product.create') }}" class="menu-link">
                         <div data-i18n="Add New Product">Add New Product</div>
                     </a>
                 </li>

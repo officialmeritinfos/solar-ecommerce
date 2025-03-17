@@ -67,7 +67,8 @@ class GeneralSettingsController extends BaseController
                 'autoReferral' => 'sometimes|boolean',
                 'password'=>['required','string', 'min:8','current_password:web'],
                 'otp'=>['required','numeric','digits:6'],
-                'currency'=>['required','string', 'exists:countries,currency']
+                'currency'=>['required','string', 'exists:countries,currency'],
+                'checkoutPercentage'=>['required','numeric','max:100','min:1']
             ],[],[
                 'otp'=>'Two-factor authentication otp',
             ])->stopOnFirstFailure();
@@ -125,6 +126,7 @@ class GeneralSettingsController extends BaseController
             $settings->maintenance_mode = $request->has('maintenance_mode') ? 1 : 0;
             $settings->autoReferral = $request->has('autoReferral')?1:0;
             $settings->onlinePayout = $request->has('onlinePayout')?1:0;
+            $settings->checkoutPercentage = $request->input('checkoutPercentage');
 
             // Save the updated settings
             $settings->save();

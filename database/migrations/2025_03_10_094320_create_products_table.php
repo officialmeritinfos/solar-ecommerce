@@ -22,6 +22,9 @@ return new class extends Migration
             $table->enum('type', ['physical', 'digital', 'service'])->default('physical');
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
+            $table->mediumText('specifications')->nullable();
+
+            $table->string('featuredImage')->nullable();
 
             $table->foreignId('product_category_id')->nullable();
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('set null');
@@ -58,6 +61,8 @@ return new class extends Migration
 
             // Optional brand (no foreign key)
             $table->string('brand')->nullable();
+
+            $table->string('dimension')->default('cm');
 
 
             // Tags (JSON stringified array)

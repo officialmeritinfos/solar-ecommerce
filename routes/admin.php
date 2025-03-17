@@ -1,7 +1,11 @@
 <?php
 
 
+use App\Http\Controllers\Admin\AffiliatesController;
 use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\Admin\OrderManagement\OrderController;
+use App\Http\Controllers\Admin\ProductManagement\CategoryController;
+use App\Http\Controllers\Admin\ProductManagement\ProductController;
 use App\Http\Controllers\Admin\Settings\AccountSettingsController;
 use App\Http\Controllers\Admin\Settings\DeliverySettingsController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
@@ -45,7 +49,7 @@ Route::controller(DeliverySettingsController::class)->group(function () {
 });
 
 /*======================== AFFILIATES ====================================*/
-Route::controller(\App\Http\Controllers\Admin\AffiliatesController::class)->group(function () {
+Route::controller(AffiliatesController::class)->group(function () {
     Route::get('affiliates/show','showAffiliates')->name('affiliate.show');
 
     //Affiliate Details
@@ -58,4 +62,30 @@ Route::controller(\App\Http\Controllers\Admin\AffiliatesController::class)->grou
     //Payouts
     Route::get('affiliates/payouts','affiliatesPayouts')->name('affiliate.payouts');
     Route::get('affiliates/payouts/{id}/detail','showAffiliatePayoutRequestDetails')->name('affiliates.payouts.detail');
+});
+
+/*======================== PRODUCT MANAGEMENT ====================================*/
+Route::controller(ProductController::class)->group(function () {
+    Route::get('products/list','showProductList')->name('products.list');
+
+    //New product
+    Route::get('product/create','showNewProductPage')->name('product.create');
+    Route::post('product/create/process','createProduct')->name('product.create.process');
+
+    //Edit product
+    Route::get('product/{id}/edit')->name('product.edit');
+
+    //Product Details
+    Route::get('product/{id}/details','productDetails')->name('product.details');
+});
+
+/*======================== PRODUCT CATEGORY MANAGEMENT ====================================*/
+Route::controller(CategoryController::class)->group(function () {
+    Route::post('category/create/process','addCategory')->name('category.create.process');
+});
+
+/*======================== ORDER MANAGEMENT ====================================*/
+Route::controller(OrderController::class)->group(function () {
+    Route::post('order/index','addCategory')->name('order.index');
+    Route::post('order/{id}/detail','addCategory')->name('order.detail');
 });

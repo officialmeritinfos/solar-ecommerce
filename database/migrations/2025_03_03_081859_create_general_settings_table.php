@@ -31,6 +31,7 @@ return new class extends Migration
             $table->boolean('onlinePayout')->default(false);
             $table->boolean('autoReferral')->default(false);
             $table->string('affiliate_bonus')->default('10');
+            $table->string('checkoutPercentage')->default(60);
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@
             <div class="card-body pt-4">
                 <form id="generalSettingsForm" method="Post" action="{{ route('admin.settings.general.update') }}">
                     <div class="row">
-                        <div class="mb-4 col-md-6">
+                        <div class="mb-4 col-md-4">
                             <label for="firstName" class="form-label">Company Name</label>
                             <input
                                 class="form-control"
@@ -39,7 +39,7 @@
                                 value="{{ $web->name }}"
                                 autofocus />
                         </div>
-                        <div class="mb-4 col-md-6">
+                        <div class="mb-4 col-md-4">
                             <label for="email" class="form-label">Support E-mail</label>
                             <input
                                 class="form-control"
@@ -48,6 +48,17 @@
                                 name="email"
                                 value="{{ $web->support_email }}"
                                 placeholder="john.doe@example.com" />
+                        </div>
+                        <div class="mb-4 col-md-4">
+                            <label for="checkoutPercentage" class="form-label">Checkout Percentage (%)</label>
+                            <input
+                                class="form-control"
+                                type="number"
+                                step="0.01"
+                                id="checkoutPercentage"
+                                name="checkoutPercentage"
+                                value="{{ $web->checkoutPercentage }}"
+                                placeholder="50" />
                         </div>
                         <div class="mb-4 col-md-4">
                             <label class="form-label" for="phoneNumber">Support Phone Number</label>
