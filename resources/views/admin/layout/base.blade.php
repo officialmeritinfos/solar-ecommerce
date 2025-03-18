@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/vendor/css/rtl/theme-default.css') }}" class="template-customizer-theme-css" />
 
     <link rel="stylesheet" href="{{ asset('dashboard/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dashboard/vendors/lightboxed/lightbox.min.css') }}" />
+
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard/vendor/libs/node-waves/node-waves.css') }}" />
@@ -117,6 +119,14 @@
 <!-- build:js assets/vendor/js/core.js') }} -->
 
 <script src="{{ asset('dashboard/vendor/libs/jquery/jquery.js') }}"></script>
+
+<script src="{{ asset('dashboard/vendors/lightboxed/lightbox.min.js') }}"></script>
+<script>
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true
+    })
+</script>
 <script src="{{ asset('dashboard/vendor/libs/popper/popper.js') }}"></script>
 <script src="{{ asset('dashboard/vendor/js/bootstrap.js') }}"></script>
 <script src="{{ asset('dashboard/vendor/libs/node-waves/node-waves.js') }}"></script>

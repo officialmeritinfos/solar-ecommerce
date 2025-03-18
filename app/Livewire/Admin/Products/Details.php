@@ -47,6 +47,10 @@ class Details extends Component
             ->where('product_id', $this->product->id)
             ->latest()
             ->paginate($this->perPage);
+        $totalOrders = OrderItem::with(['order.user'])
+            ->where('product_id', $this->product->id)
+            ->latest()
+            ->get()->count();
 
         $customers = $orders->pluck('order.user')->unique('id')->filter();
         $photos = $this->product->photos;
@@ -55,6 +59,7 @@ class Details extends Component
             'orders' => $orders,
             'customers' => $customers,
             'photos' => $photos,
+            'totalOrders'=>$totalOrders
         ]);
     }
     public function placeholder()
@@ -104,4 +109,5 @@ class Details extends Component
         </div>
         HTML;
     }
+
 }

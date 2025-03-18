@@ -73,7 +73,8 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('product/create/process','createProduct')->name('product.create.process');
 
     //Edit product
-    Route::get('product/{id}/edit')->name('product.edit');
+    Route::get('product/{id}/edit','showProductEditPage')->name('product.edit');
+    Route::post('product/{id}/edit/process','updateProduct')->name('product.edit.process');
 
     //Product Details
     Route::get('product/{id}/details','productDetails')->name('product.details');
