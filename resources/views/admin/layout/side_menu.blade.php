@@ -32,31 +32,43 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.products.list') }}" class="menu-link">
-                        <div data-i18n="Manage Products">Manage Products</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.product.create') }}" class="menu-link">
-                        <div data-i18n="Add New Product">Add New Product</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Manage Coupons">Manage Coupons</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Create Discount Code">Create Discount Code</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.category.index') }}" class="menu-link">
-                        <div data-i18n="Categories">Categories</div>
-                    </a>
-                </li>
+                @can('view product')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.products.list') }}" class="menu-link">
+                            <div data-i18n="Manage Products">Manage Products</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('create product')
+                   <li class="menu-item">
+                        <a href="{{ route('admin.product.create') }}" class="menu-link">
+                            <div data-i18n="Add New Product">Add New Product</div>
+                        </a>
+                   </li>
+                @endcan
+                @can('view coupons')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.coupons.index') }}" class="menu-link">
+                            <div data-i18n="Manage Coupons">Manage Coupons</div>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('create coupon')
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Create Discount Code">Create Discount Code</div>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('manage product categories')
+                    <li class="menu-item">
+                       <a href="{{ route('admin.category.index') }}" class="menu-link">
+                           <div data-i18n="Categories">Categories</div>
+                       </a>
+                    </li>
+                @endcan
 
             </ul>
         </li>
@@ -64,40 +76,44 @@
         <!-- Add spacing -->
         <li class="menu-spacing"></li>
 
-        <!-- Front Pages -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
-                <div data-i18n="Order Management">Order Management</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="All Orders">All Orders</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link" >
-                        <div data-i18n="Pending Orders">Pending Orders</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Completed Orders">Completed Orders</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Cancelled Orders">Cancelled Orders</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Manage Deliveries">Manage Deliveries</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @can('view orders')
+            <!-- Front Pages -->
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
+                    <div data-i18n="Order Management">Order Management</div>
+                </a>
+                <ul class="menu-sub">
+
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="All Orders">All Orders</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#" class="menu-link" >
+                            <div data-i18n="Pending Orders">Pending Orders</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Completed Orders">Completed Orders</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Cancelled Orders">Cancelled Orders</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Manage Deliveries">Manage Deliveries</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
         <!-- Add spacing -->
         <li class="menu-spacing"></li>
@@ -117,11 +133,13 @@
                 <div data-i18n="Customer">Customers</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="All Customers">All Customers</div>
-                    </a>
-                </li>
+                @can('view customers')
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="All Customers">All Customers</div>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </li>
         <li class="menu-item">
@@ -130,21 +148,29 @@
                 <div data-i18n="Affiliates">Affiliates</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.affiliate.show') }}" class="menu-link">
-                        <div data-i18n="All Affiliates">All Affiliates</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.affiliate.earnings') }}" class="menu-link">
-                        <div data-i18n="Affiliates Earnings">Affiliates Earnings</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.affiliate.payouts') }}" class="menu-link">
-                        <div data-i18n="Payout Requests">Payouts Requests</div>
-                    </a>
-                </li>
+                @can('view affiliates')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.affiliate.show') }}" class="menu-link">
+                            <div data-i18n="All Affiliates">All Affiliates</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('approve affiliate commissions')
+                    <li class="menu-item">
+                       <a href="{{ route('admin.affiliate.earnings') }}" class="menu-link">
+                           <div data-i18n="Affiliates Earnings">Affiliates Earnings</div>
+                       </a>
+                    </li>
+                @endcan
+
+                @can('manage affiliate payout settings')
+
+                   <li class="menu-item">
+                       <a href="{{ route('admin.affiliate.payouts') }}" class="menu-link">
+                           <div data-i18n="Payout Requests">Payouts Requests</div>
+                       </a>
+                   </li>
+                @endcan
 
             </ul>
         </li>
@@ -216,18 +242,22 @@
                 <div data-i18n="Reports & Analytics">Reports & Analytics</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Sales Report">Sales Report</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Affiliate Performance Report">
-                            Affiliate Performance Report
-                        </div>
-                    </a>
-                </li>
+                @can('view sales reports')
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Sales Report">Sales Report</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('view affiliate performance reports')
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div data-i18n="Affiliate Performance Report">
+                                Affiliate Performance Report
+                            </div>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </li>
 
@@ -273,16 +303,20 @@
                 <div data-i18n="Settings">Settings</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.settings.general') }}" class="menu-link">
-                        <div data-i18n="General Settings">General Settings</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.delivery.settings') }}" class="menu-link">
-                        <div data-i18n="Delivery Settings">Delivery Settings</div>
-                    </a>
-                </li>
+                @can('update general settings')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.settings.general') }}" class="menu-link">
+                            <div data-i18n="General Settings">General Settings</div>
+                        </a>
+                    </li>
+                @endcan
+                @can('configure delivery settings')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.delivery.settings') }}" class="menu-link">
+                            <div data-i18n="Delivery Settings">Delivery Settings</div>
+                        </a>
+                    </li>
+                @endcan
 
                 <li class="menu-item">
                     <a href="{{ route('admin.account.settings') }}" class="menu-link">

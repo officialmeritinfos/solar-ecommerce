@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AffiliatesController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\OrderManagement\OrderController;
 use App\Http\Controllers\Admin\ProductManagement\CategoryController;
+use App\Http\Controllers\Admin\ProductManagement\CouponController;
 use App\Http\Controllers\Admin\ProductManagement\ProductController;
 use App\Http\Controllers\Admin\Settings\AccountSettingsController;
 use App\Http\Controllers\Admin\Settings\DeliverySettingsController;
@@ -79,13 +80,21 @@ Route::controller(ProductController::class)->group(function () {
     //Product Details
     Route::get('product/{id}/details','productDetails')->name('product.details');
 });
-
 /*======================== PRODUCT CATEGORY MANAGEMENT ====================================*/
 Route::controller(CategoryController::class)->group(function () {
     Route::get('category/index','showCategories')->name('category.index');
     Route::post('category/create/process','addCategory')->name('category.create.process');
     Route::delete('category/delete/{id}/process','deleteCategory')->name('category.delete.process');
     Route::put('category/edit/{id}/process','updateCategory')->name('category.edit.process');
+});
+/*======================== DISCOUNT COUPON MANAGEMENT ====================================*/
+Route::controller(CouponController::class)->group(function () {
+    Route::get('coupons/index','showCouponLists')->name('coupons.index');
+    //Add new coupon
+    Route::get('coupons/create','newCoupon')->name('coupons.create');
+    Route::post('coupons/create/process','processNewCoupon')->name('coupons.create.process');
+    //Coupon Details
+    Route::get('coupons/{id}/details','couponDetails')->name('coupons.details');
 });
 
 /*======================== ORDER MANAGEMENT ====================================*/
