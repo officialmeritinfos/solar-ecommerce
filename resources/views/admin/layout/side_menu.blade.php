@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.category.index') }}" class="menu-link">
                         <div data-i18n="Categories">Categories</div>
                     </a>
                 </li>

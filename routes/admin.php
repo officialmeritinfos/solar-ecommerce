@@ -82,7 +82,10 @@ Route::controller(ProductController::class)->group(function () {
 
 /*======================== PRODUCT CATEGORY MANAGEMENT ====================================*/
 Route::controller(CategoryController::class)->group(function () {
+    Route::get('category/index','showCategories')->name('category.index');
     Route::post('category/create/process','addCategory')->name('category.create.process');
+    Route::delete('category/delete/{id}/process','deleteCategory')->name('category.delete.process');
+    Route::put('category/edit/{id}/process','updateCategory')->name('category.edit.process');
 });
 
 /*======================== ORDER MANAGEMENT ====================================*/

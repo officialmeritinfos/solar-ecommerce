@@ -41,15 +41,63 @@ const categoryRequest=function (){
 
                         $("#category-org").append(`<option value="${category.id}" selected>${category.name}</option>`);
 
+                        $("#parent_id").append(`<option value="${category.id}">${category.name}</option>`);
+
+                        // Append to table
+                        const rowHTML = `
+                            <tr data-id="${category.id}"
+                                data-name="${category.name}"
+                                data-slug="${category.slug}"
+                                data-description="${category.description ?? ''}"
+                                data-image="${category.image_url ?? ''}"
+                                data-image-path="${category.image ?? ''}"
+                                data-parent_id="${category.parent_id ?? ''}"
+                                data-is_active="${category.is_active ? 1 : 0}"
+                                data-edit-url="${category.edit_url}"
+                                data-delete-url="${category.delete_url}"
+                            >
+                                <td>NEW</td>
+                                <td>
+                                    ${category.image_url
+                            ? `<img src="${category.image_url}" width="50" alt="Image">`
+                            : `<span class="text-muted">No Image</span>`}
+                                </td>
+                                <td>${category.name}</td>
+                                <td>${category.slug}</td>
+                                <td>${category.parent_name || '—'}</td>
+                                <td>${category.product_count || 0}</td>
+                                <td>
+                                    <span class="badge bg-${category.is_active ? 'success' : 'secondary'}">
+                                        ${category.is_active ? 'Active' : 'Inactive'}
+                                    </span>
+                                </td>
+                                <td>${category.created_at}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary edit-category-btn" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger delete-category-btn" title="Delete">
+                                        <i class="fa fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+
+                        $("#categories-table tbody").append(rowHTML);
+
                         //return to natural stage
                         setTimeout(function(){
                             $('.saveCategory').attr('disabled', false);
                             $(".saveCategory").LoadingOverlay("hide");
 
+                            $('#addCategory')[0].reset();
+
                             $("#addCategory :input").prop("readonly", false);
                             // Close modal
                             $("#addCategoryModal").modal("hide");
                             $("#newCategoryName").val("");
+
+
                         }, 3000);
                     }
                 },
