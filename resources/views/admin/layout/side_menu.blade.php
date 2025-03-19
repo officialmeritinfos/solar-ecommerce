@@ -221,12 +221,12 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.affiliate.payouts') }}" class="menu-link">
                         <div data-i18n="Affiliate Withdrawal Requests">Affiliate Withdrawal Requests</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('admin.affiliate.payouts') }}" class="menu-link">
                         <div data-i18n="Approved/Rejected Payouts">Approved/Rejected Payouts</div>
                     </a>
                 </li>
