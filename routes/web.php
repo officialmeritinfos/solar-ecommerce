@@ -22,6 +22,12 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('shop/collections/{slug}', 'categoryProducts')->name('shop.category.products');
     Route::get('shop/products/{slug}/{id}','productDetail')->name('shop.products.details');
 });
+//Cart Controller
+Route::controller(\App\Http\Controllers\CartController::class)->group(function () {
+    Route::get('cart', 'index')->name('cart.index');
+
+});
+
 
 Route::controller(LegalController::class)->prefix('legal')->group(function (){
     Route::get('terms-and-conditions','terms')->name('legal.terms-and-conditions');

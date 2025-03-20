@@ -29,7 +29,6 @@
                 <div class="col-lg-12">
                     <div class="title-area-center title-g">
                         <p class="pre">
-
                         </p>
                         <h2 class="title">
                             {{ $pageName }}
