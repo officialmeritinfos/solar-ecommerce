@@ -226,3 +226,47 @@ if (!function_exists('numberOfReferrals')){
         return \App\Models\User::where('referred_by', $id)->count();
     }
 }
+
+if (!function_exists('getCategories')){
+    function getCategories()
+    {
+        return \App\Models\ProductCategory::where('is_active', 1)->get();
+    }
+}
+
+if (!function_exists('companyAbout')){
+    function companyAbout()
+    {
+        return \App\Models\About::first();
+    }
+}
+
+if (!function_exists('homeSliders')){
+    function homeSliders(){
+        return \App\Models\HomeSlider::where('active',1)->get();
+    }
+}
+
+if (!function_exists('companyFaqs')){
+    function companyFaqs(){
+        return \App\Models\Faq::get();
+    }
+}
+
+if (!function_exists('companySocials')){
+    function companySocials(){
+        return \App\Models\SocialAccount::where('active',1)->get();
+    }
+}
+
+if (!function_exists('useCaseSolutions')){
+    function useCaseSolutions(){
+        return \App\Models\UseCaseSolution::where('status',1)->get();
+    }
+}
+
+if (!function_exists('homeProducts')){
+    function homeProducts(){
+        return \App\Models\Product::where('status','active')->get();
+    }
+}
