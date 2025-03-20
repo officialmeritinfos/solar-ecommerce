@@ -68,9 +68,20 @@ class GeneralSettingsController extends BaseController
                 'password'=>['required','string', 'min:8','current_password:web'],
                 'otp'=>['required','numeric','digits:6'],
                 'currency'=>['required','string', 'exists:countries,currency'],
-                'checkoutPercentage'=>['required','numeric','max:100','min:1']
+                'checkoutPercentage'=>['required','numeric','max:100','min:1'],
+                'terms' => ['required','string'],
+                'privacy' => ['required','string'],
+                'refund' => ['required','string'],
+                'shipping' => ['required','string'],
+                'engineers_terms' => ['required','string'],
+                'engineers_document' => ['nullable','mimes:pdf,docx'],
             ],[],[
                 'otp'=>'Two-factor authentication otp',
+                'terms'=>'Terms & Conditions',
+                'privacy'=>'Privacy Policy',
+                'refund'=>'Return & Refund Policy',
+                'shipping'=>'Shipping Policy',
+                'engineers_terms'=>'Field Support Engineers Terms',
             ])->stopOnFirstFailure();
 
             // If validation fails, return a JSON response with error messages
@@ -96,6 +107,11 @@ class GeneralSettingsController extends BaseController
             $settings->address = $request->input('address');
             $settings->currency = $request->input('currency');
             $settings->affiliate_bonus = $request->input('affiliate_bonus');
+            $settings->terms = $request->input('terms');
+            $settings->privacy = $request->input('privacy');
+            $settings->refund = $request->input('refund');
+            $settings->shipping = $request->input('shipping');
+            $settings->engineers = $request->input('engineers_terms');
 
             // Handle favicon upload in the `public` folder
             if ($request->hasFile('favicon')) {
@@ -115,6 +131,25 @@ class GeneralSettingsController extends BaseController
 
                 // Save the public path of the uploaded file
                 $settings->favicon = $faviconFile;
+            }
+            // Handle document upload in the `public` folder
+            if ($request->hasFile('engineers_document')) {
+                // Define the favicon directory path
+                $documentPath = public_path('uploads/');
+
+                // Delete old favicon if exists
+                if ($settings->engineer_form && File::exists(public_path($settings->engineer_form))) {
+                    File::delete(public_path('uploads/'.$settings->engineer_form));
+                }
+
+                // Generate a unique file name
+                $documentFile = time() . '.' . $request->file('engineers_document')->getClientOriginalExtension();
+
+                // Move the uploaded file to the `public/favicons/` directory
+                $request->file('engineers_document')->move($documentPath, $documentFile);
+
+                // Save the public path of the uploaded file
+                $settings->engineer_form = $documentFile;
             }
 
             // Handle boolean toggle fields

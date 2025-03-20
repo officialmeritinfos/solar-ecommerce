@@ -127,6 +127,63 @@
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                             name="address">{{ $web->address }}</textarea>
                         </div>
+                        <div class="mb-6">
+                            <label class="form-label" >Terms & Conditions<sup class="text-danger">*</sup></label>
+                            <textarea
+                                type="text"
+                                class="form-control summernote"
+                                placeholder="Terms & Conditions"
+                                name="terms"
+                                aria-label="Post title">{!! $web->terms !!}</textarea>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" >Privacy Policy<sup class="text-danger">*</sup></label>
+                            <textarea
+                                type="text"
+                                class="form-control summernote"
+                                placeholder="Privacy Policy"
+                                name="privacy"
+                                aria-label="Post title">{!! $web->privacy !!}</textarea>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" >Return & Refund Policy<sup class="text-danger">*</sup></label>
+                            <textarea
+                                type="text"
+                                class="form-control summernote"
+                                placeholder="Return & Refund Policy"
+                                name="refund"
+                                aria-label="Post title">{!! $web->refund !!}</textarea>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" >Shipping Policy<sup class="text-danger">*</sup></label>
+                            <textarea
+                                type="text"
+                                class="form-control summernote"
+                                placeholder="Shipping Policy"
+                                name="shipping"
+                                aria-label="Post title">{!! $web->shipping !!}</textarea>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" >Field Support  Engineers Terms & Conditions<sup class="text-danger">*</sup></label>
+                            <textarea
+                                type="text"
+                                class="form-control summernote"
+                                placeholder="Field Support  Engineers Terms & Conditions"
+                                name="engineers_terms"
+                                aria-label="Post title">{!! $web->engineers !!}</textarea>
+                        </div>
+
+                        <div class="mb-4 col-md-12">
+                            <label for="organization" class="form-label">Field Support  Engineers Terms & Conditions Document</label>
+                            <input
+                                type="file"
+                                class="form-control"
+                                id="organization"
+                                name="engineers_document"/>
+                            <small>
+                                Maximum file size supported : {{ $web->file_upload_max_size/1024 }}MB
+                            </small>
+                        </div>
                         <div class="mb-4 col-md-6">
                             <div class="form-check form-switch mb-2">
                                 <input class="form-check-input" type="checkbox" id="oemRegistration"
