@@ -207,65 +207,83 @@
             <div class="auto-container">
                 <div class="row">
                     <!--Footer Column-->
-                    <div class="footer-column col-xl-3 col-sm-6">
-                        <div class="footer-widget about-widget">
-                            <div class="logo">
-                                <a href="index"><img src="{{ asset('home/product_detail/images/logo-2.png') }}" alt="" /></a>
-                            </div>
-                            <p class="text mb-2">012 Broklyn Street, 57 <br class="d-none d-xl-block"> New York, USA</p>
-                            <p class="mb-2"><a class="text" href="https://html.kodesolution.com/cdn-cgi/l/email-protection#3f515a5a5b575a534f7f5b50525e5651115c5052"><span class="__cf_email__" data-cfemail="543a3131303c31382414303b39353d3a7a373b39">[email&#160;protected]</span></a></p>
-                            <p><a class="text-white" href="tel:9993330000">999 333 0000</a></p>
-                        </div>
-                    </div>
-                    <!--Footer Column-->
-                    <div class="footer-column col-xl-3 col-sm-6">
+                    <div class="footer-column col-xl-4 col-sm-6">
                         <div class="footer-widget">
-                            <h3 class="widget-title">Service</h3>
-                            <ul class="user-links">
-                                <li><a href="#">Reliability & Punctuality</a></li>
-                                <li><a href="#">Trusted Franchise</a></li>
-                                <li><a href="#">Warehoues Storage</a></li>
-                                <li><a href="#">Real Time Tracking</a></li>
-                                <li><a href="#">Transparent Pricing</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--Footer Column-->
-                    <div class="footer-column col-xl-3 col-sm-6">
-                        <div class="footer-widget gallery-widget">
-                            <h3 class="widget-title">Projects</h3>
+                            <h3 class="widget-title">Products</h3>
                             <ul class="user-links two-column">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">New Projects</a></li>
-                                <li><a href="#">Our History</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Blog Post</a></li>
-                                <li><a href="#">Press Release</a></li>
-                                <li><a href="#">Help Topics</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms Of Use</a></li>
+                                @foreach(getCategories() as $category)
+                                    <li><a href="{{ route('shop.category.products',$category->slug) }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <!--Footer Column-->
-                    <div class="footer-column col-xl-3 col-sm-6">
+                    <div class="footer-column col-xl-4 col-sm-6">
                         <div class="footer-widget">
-                            <h3 class="widget-title">Newsletter</h3>
-                            <div class="widget-content">
-                                <div class="subscribe-form">
-                                    <div class="text">Subscribe our newsletter to get our latest update & news</div>
-                                    <form method="post" action="#">
-                                        <div class="form-group">
-                                            <input type="email" name="email" class="email" value="" placeholder="Email Address" required="" />
-                                            <button type="button" class="theme-btn btn-style-one">
-                                                <span class="btn-title"><i class="fa fa-paper-plane"></i></span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <h3 class="widget-title">Useful Links</h3>
+                            <ul class="user-links two-column">
+                                <li>
+                                    <a href="{{ route('home.about') }}">
+                                        <p>About Us</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('home.faqs') }}">
+                                        <p>Faqs</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('home.contact') }}">
+                                        <p>Contact Us</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('legal.terms-and-conditions') }}">
+                                        <p>Terms of Service</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('legal.privacy-policy') }}">
+                                        <p>Privacy Policy</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('legal.refund-policy') }}">
+                                        <p>Refund Policy</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    <!--Footer Column-->
+                    <div class="footer-column col-xl-4 col-sm-6">
+                        <div class="footer-widget gallery-widget">
+                            <h3 class="widget-title">Other Links</h3>
+                            <ul class="user-links two-column">
+                                <li>
+                                    <a href="#">
+                                        <p>Engineer Registrations</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <p>OEMs Registration</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <p>Affiliate Registration</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('legal.shipping-policy') }}">
+                                        <p>Shipping Policy</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -291,6 +309,7 @@
 <script src="{{ asset('home/product_detail/js/jquery.fancybox.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/jquery-ui.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/jquery.countdown.js') }}"></script>
+<script src="{{ asset('home/product_detail/js/bxslider.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/mixitup.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/wow.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/appear.js') }}"></script>

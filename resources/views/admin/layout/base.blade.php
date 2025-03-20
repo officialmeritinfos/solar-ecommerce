@@ -43,6 +43,9 @@
     <link rel="stylesheet" href="{{ asset('dashboard/vendors/lightboxed/lightbox.min.css') }}" />
 
 
+    <link rel="stylesheet" href="{{asset('dashboard/vendors/summernote/summernote-bs5.css')}}">
+
+
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard/vendor/libs/node-waves/node-waves.css') }}" />
 
@@ -184,6 +187,14 @@
                 tinymce.triggerSave(); // Ensures the content is saved to the textarea
             });
         }
+    });
+</script>
+<script src="{{asset('dashboard/vendors/summernote/summernote-bs5.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            height: 150,
+        });
     });
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

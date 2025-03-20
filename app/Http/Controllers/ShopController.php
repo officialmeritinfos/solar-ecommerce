@@ -6,6 +6,7 @@ use App\Models\GeneralSetting;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends BaseController
@@ -37,8 +38,13 @@ class ShopController extends BaseController
     }
 
     //product details
-    public function productDetail($slug, $id)
+    public function productDetail(Request $request, $slug, $id)
     {
+        //Set the referral code of the affiliate
+        $referralCode = $request->get('DIST');
+        Cookie::queue('referral_code', $referralCode, 60 * 24 * 90);
+
+
         $product = Product::where([
             'slug' => $slug,
             'id' => $id,

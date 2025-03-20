@@ -132,7 +132,7 @@
                                     <label class="form-label" >Full Description<sup class="text-danger">*</sup></label>
                                     <textarea
                                         type="text"
-                                        class="form-control editor"
+                                        class="form-control summernote"
                                         placeholder="Product Full Description"
                                         name="description"
                                         aria-label="Post title">{!! $product->description !!}</textarea>
@@ -142,7 +142,7 @@
                                     <label class="form-label" >Product Specifications<sup class="text-danger">*</sup></label>
                                     <textarea
                                         type="text"
-                                        class="form-control editor"
+                                        class="form-control summernote"
                                         placeholder="Product Full Specifications"
                                         name="specifications"
                                         aria-label="Post title">{!! $product->specifications !!}</textarea>
@@ -444,13 +444,16 @@
                                     </select>
                                 </div>
                                 <!-- Tags -->
+                                @php
+                                    $tags = implode(',', $product->tags)
+                                @endphp
                                 <div>
                                     <label for="ecommerce-product-tags" class="form-label mb-1">Tags</label>
                                     <input
                                         id="ecommerce-product-tags"
                                         class="form-control"
                                         name="tags"
-                                        value="{{ $product->tags }}"
+                                        value="{{ $tags }}"
                                         aria-label="Product Tags" />
                                 </div>
                             </div>

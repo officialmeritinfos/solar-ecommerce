@@ -124,7 +124,7 @@
                                     <label class="form-label" >Full Description<sup class="text-danger">*</sup></label>
                                     <textarea
                                         type="text"
-                                        class="form-control editor"
+                                        class="form-control summernote"
                                         placeholder="Product Full Description"
                                         name="description"
                                         aria-label="Post title"></textarea>
@@ -134,7 +134,7 @@
                                     <label class="form-label" >Product Specifications<sup class="text-danger">*</sup></label>
                                     <textarea
                                         type="text"
-                                        class="form-control editor"
+                                        class="form-control summernote"
                                         placeholder="Product Full Specifications"
                                         name="specifications"
                                         aria-label="Post title"></textarea>

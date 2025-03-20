@@ -25,7 +25,8 @@ Route::controller(ShopController::class)->group(function () {
 //Cart Controller
 Route::controller(\App\Http\Controllers\CartController::class)->group(function () {
     Route::get('cart', 'index')->name('cart.index');
-
+    //Add to cart
+    Route::post('cart/add', 'index')->name('cart.add');
 });
 
 
