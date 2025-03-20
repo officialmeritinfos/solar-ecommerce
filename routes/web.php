@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +24,12 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('shop/products/{slug}/{id}')->name('shop.products.details');
 });
 
-Route::prefix('legal')->group(function (){
-    Route::get('terms-and-conditions')->name('legal.terms-and-conditions');
-    Route::get('privacy-policy')->name('legal.privacy-policy');
-    Route::get('refund-policy')->name('legal.refund-policy');
-    Route::get('shipping-policy')->name('legal.shipping-policy');
+Route::controller(LegalController::class)->prefix('legal')->group(function (){
+    Route::get('terms-and-conditions','terms')->name('legal.terms-and-conditions');
+    Route::get('privacy-policy','privacy')->name('legal.privacy-policy');
+    Route::get('refund-policy','refund')->name('legal.refund-policy');
+    Route::get('shipping-policy','shipping')->name('legal.shipping-policy');
+    Route::get('field-support-engineer-terms','engineerTerms')->name('legal.engineer-terms');
 });
 
 
