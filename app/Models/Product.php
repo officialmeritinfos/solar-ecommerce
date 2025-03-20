@@ -56,4 +56,10 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class,'product_id');
     }
+
+    public function getTagsAttribute($value)
+    {
+        return json_decode($value, true) ?? [];
+    }
+
 }

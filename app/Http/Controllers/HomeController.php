@@ -57,7 +57,6 @@ class HomeController extends BaseController
     //FAQs
     public function faqs()
     {
-
         return view('home.faqs')->with([
             'pageName' => "Frequently Asked Questions",
             'siteName' => GeneralSetting::first()->name,

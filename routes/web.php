@@ -19,9 +19,8 @@ Route::controller(HomeController::class)->group(function () {
 //Shop controller
 Route::controller(ShopController::class)->group(function () {
     Route::get('shop', 'index')->name('shop');
-    Route::get('shop/{slug}/products', 'categoryProducts')->name('shop.category.products');
-
-    Route::get('shop/products/{slug}/{id}')->name('shop.products.details');
+    Route::get('shop/collections/{slug}', 'categoryProducts')->name('shop.category.products');
+    Route::get('shop/products/{slug}/{id}','productDetail')->name('shop.products.details');
 });
 
 Route::controller(LegalController::class)->prefix('legal')->group(function (){
