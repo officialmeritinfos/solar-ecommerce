@@ -190,7 +190,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Footer Section"
-                                name="footer_codes"
+                                name="footer_codes" rows="10"
                                 aria-label="Post title">{!! $web->footer_codes !!}</textarea>
                             <small>
                                 Use this to inject scripts to your website footer. Take great care to ensure you are entering the right codes.
@@ -202,7 +202,7 @@
                             <textarea
                                 type="text"
                                 class="form-control"
-                                placeholder="Footer Section"
+                                placeholder="Header Section" rows="10"
                                 name="header_codes"
                                 aria-label="Post title">{!! $web->header_codes !!}</textarea>
                             <small>

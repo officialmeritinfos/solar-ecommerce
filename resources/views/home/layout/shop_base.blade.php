@@ -17,6 +17,8 @@
     <!--[if lt IE 9]><script src="{{ asset('home/product_detail/js/respond.js') }}"></script><![endif]-->
     @stack('css')
     @include('general_css')
+
+    {!! $web->header_codes !!}
 </head>
 
 <body>
@@ -317,6 +319,7 @@
 <script src="{{ asset('home/product_detail/js/swiper.min.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/owl.js') }}"></script>
 <script src="{{ asset('home/product_detail/js/script.js') }}"></script>
+{!! $web->footer_codes !!}
 @include('general_js')
 @stack('js')
 </body>

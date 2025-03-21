@@ -22,6 +22,7 @@
     <!-- Custom css -->
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}">
     @stack('css')
+    {!! $web->header_codes !!}
 </head>
 
 <body class="index-two">
@@ -442,6 +443,7 @@
 <script src="{{ asset('home/js/plugins/jquery-timepicker.js') }}"></script>
 <script src="{{ asset('home/js/plugins/bootstrap.min.js') }}"></script>
 <script src="{{ asset('home/js/vendor/magnific-popup.min.js') }}"></script>
+{!! $web->footer_codes !!}
 @include('general_js')
 <script src="{{ asset('home/js/main.js') }}"></script>
 @stack('js')
