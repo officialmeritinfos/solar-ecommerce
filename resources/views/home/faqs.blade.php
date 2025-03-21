@@ -47,9 +47,9 @@
                                             {{ $faq->questions }}
                                         </button>
                                     </h2>
-                                    <div id="collapseOne{{$faq->id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div id="collapseOne{{$faq->id}}" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            {{ $faq->answer }}
+                                            {{ $faq->answers }}
                                         </div>
                                     </div>
                                 </div>

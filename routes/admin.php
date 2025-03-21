@@ -7,9 +7,13 @@ use App\Http\Controllers\Admin\OrderManagement\OrderController;
 use App\Http\Controllers\Admin\ProductManagement\CategoryController;
 use App\Http\Controllers\Admin\ProductManagement\CouponController;
 use App\Http\Controllers\Admin\ProductManagement\ProductController;
+use App\Http\Controllers\Admin\Settings\AboutUsController;
 use App\Http\Controllers\Admin\Settings\AccountSettingsController;
 use App\Http\Controllers\Admin\Settings\DeliverySettingsController;
+use App\Http\Controllers\Admin\Settings\FaqController;
 use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
+use App\Http\Controllers\Admin\Settings\HomeSliderController;
+use App\Http\Controllers\Admin\Settings\SolutionsController;
 use \Illuminate\Support\Facades\Route;
 
 /*=========================== ADMIN DASHBOARD ===============================*/
@@ -47,6 +51,43 @@ Route::controller(AccountSettingsController::class)->group(function () {
 Route::controller(DeliverySettingsController::class)->group(function () {
     Route::get('delivery/settings','showLocation')->name('delivery.settings');
     Route::get('delivery/settings/{id}/locations','showSubLocation')->name('delivery.settings.subLocations');
+});
+//Slider Settings
+Route::controller(HomeSliderController::class)->group(function () {
+    Route::get('settings/home-sliders','showSliders')->name('settings.home-sliders');
+    Route::get('settings/home-sliders/new','showNewSliderForm')->name('settings.home-sliders.new');
+    Route::get('settings/home-sliders/{id}/edit','showEditSliderForm')->name('settings.home-sliders.edit');
+    Route::get('settings/home-sliders/{id}/delete','deleteHomeSlider')->name('settings.home-sliders.delete');
+
+    //Processing
+    Route::post('settings/home-sliders/new/process','processNewSlider')->name('settings.home-sliders.new.process');
+    Route::post('settings/home-sliders/{id}/update/process','processEditSlider')->name('settings.home-sliders.edit.process');
+
+});
+//About us Settings
+Route::controller(AboutUsController::class)->group(function () {
+    Route::get('settings/about-us','showForm')->name('settings.about-us');
+
+    //Processing
+    Route::post('settings/about-us/process','update')->name('settings.about-us.process');
+
+});
+//Solutions Settings
+Route::controller(SolutionsController::class)->group(function () {
+    Route::get('settings/solutions','showSliders')->name('settings.solutions');
+    Route::get('settings/solutions/new','showNewSolutionForm')->name('settings.solutions.new');
+    Route::get('settings/solutions/{id}/edit','showEditForm')->name('settings.solutions.edit');
+    Route::get('settings/solutions/{id}/delete','deleteSolution')->name('settings.solutions.delete');
+
+    //Processing
+    Route::post('settings/solutions/new/process','processNewSolution')->name('settings.solutions.new.process');
+    Route::post('settings/solutions/{id}/update/process','processEditForm')->name('settings.solutions.edit.process');
+
+});
+//Faq Settings
+Route::controller(FaqController::class)->group(function () {
+    Route::get('settings/faqs','showFaqs')->name('settings.faqs');
+
 });
 
 /*======================== AFFILIATES ====================================*/

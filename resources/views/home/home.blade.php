@@ -21,7 +21,7 @@
                                                 {{ $slider->title }}
                                             </h1>
                                             <p class="disc">
-                                                {!! $slider->description !!}
+                                                {!! str_replace(['<p>','</p>'],'',$slider->description) !!}
                                             </p>
                                             <div class="button-solari-banner-area">
                                                 <a href="{{ $slider->link_url??route('shop') }}" class="rts-btn btn-primary">{{ $slider->link_text??'Shop' }}</a>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="row g-24 mt--20">
                     @foreach(useCaseSolutions() as $solution)
-                        <div class="col-xl-3 col-lg-4 col-sm-6 col-sm-6 col-12">
+                        <div class="col-xl-4 col-lg-4 col-sm-6 col-sm-6 col-12">
                             <!-- ignle service height solari -->
                             <div class="single-solari-service-start">
                                 <div class="icon-area">
@@ -223,6 +223,45 @@
         <!-- service heign area end -->
     @endif
 
+    @if($faqs->count() >0)
+        <!-- rts faq area start -->
+        <div class="rts-faq-area rts-section-gap">
+            <div class="container">
+                <div class="row g-24 align-items-start">
+                    <div class="col-lg-12">
+                        <div class="title-area-left">
+                            <p class="pre">
+                                <span>Question</span> For US
+                            </p>
+                            <h2 class="title skew-up">
+                                Some General Question?
+                            </h2>
+                        </div>
+                        <div class="accordion-solar-faq">
+                            <div class="accordion" id="accordionExample">
+                                @foreach($faqs as $faq)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$faq->id}}" aria-expanded="true" aria-controls="collapseOne">
+                                                {{ $faq->questions }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne{{$faq->id}}" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {{ $faq->answers }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endif
 
 
     <!-- rts- clients review area start -->
@@ -267,7 +306,7 @@
                     <div class="single-counter-up-start-solari">
                         <div class="bg-text">18</div>
                         <div class="main-content">
-                            <h2 class="title"><span class="counter">18</span>K</h2>
+                            <h2 class="title"><span class="counter">18</span></h2>
                             <p>Award Winnings</p>
                         </div>
                     </div>

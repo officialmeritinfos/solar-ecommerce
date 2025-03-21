@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\CustomMail;
 use App\Models\About;
+use App\Models\Faq;
 use App\Models\GeneralSetting;
 use App\Models\UseCaseSolution;
 use App\Rules\ReCaptcha;
@@ -20,6 +21,7 @@ class HomeController extends BaseController
             'pageName' => "Solar and Renewable Energy Services & Products",
             'siteName' => GeneralSetting::first()->name,
             'web'      => GeneralSetting::first(),
+            'faqs'     => Faq::take(5)->get(),
         ]);
     }
     //about

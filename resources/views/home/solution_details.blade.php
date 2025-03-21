@@ -26,13 +26,13 @@
     <!-- blog details area start -->
     <div class="rts-blog-list-area rts-section-gap">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5 justify-content-center">
                 <!-- rts blo post area -->
                 <div class="col-xl-8 col-md-12 col-sm-12 col-12">
                     <!-- single post -->
                     <div class="blog-single-post-listing details mb--0">
                         <div class="thumbnail">
-                            <img src="{{ $solution->photo }}" alt="Business-Blog">
+                            <img src="{{ asset($solution->photo) }}" alt="Business-Blog">
                         </div>
                         <div class="blog-listing-content">
 

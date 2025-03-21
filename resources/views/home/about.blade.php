@@ -30,7 +30,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <!-- about inner solar energy -->
-                        <div class="rts-about-left-image-area">
+                        <div class="rts-about-left-image-area mb-5">
                             <div class="thumbnail">
                                 <img src="{{ asset($about->photo) }}" alt="solar energy">
                             </div>
@@ -41,12 +41,12 @@
                         <!-- about nrighht content area start -->
                         <div class="about-right-content-area-solar-energy">
                             <div class="title-area-left">
-                                <p class="pre">
-                                    <span>About</span> {{ $siteName }}
-                                </p>
                                 <h2 class="title skew-up">
                                     {{ $about->title??'' }}
                                 </h2>
+                            </div>
+                            <div class="single-about-content-solar">
+                                {!! str_replace(['[Company]'],[$siteName],$about->content??'') !!}
                             </div>
                             <!-- tab area start about -->
                             <ul class="nav custom-nav-soalr-about nav-pills" id="pills-tab" role="tablist">
@@ -66,20 +66,20 @@
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                     <!-- single nav content start -->
                                     <div class="single-about-content-solar">
-                                        {!! $about->whyChooseUs??'' !!}
+                                        {!! str_replace(['[Company]'],[$siteName],$about->whyChooseUs??'') !!}
                                     </div>
                                     <!-- single nav content end -->
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                     <!-- single nav content start -->
                                     <div class="single-about-content-solar">
-                                        {!! $about->mission??'' !!}
+                                        {!! str_replace(['[Company]'],[$siteName],$about->mission??'') !!}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                                     <!-- single nav content start -->
                                     <div class="single-about-content-solar">
-                                        {!! $about->vision??'' !!}
+                                        {!! str_replace(['[Company]'],[$siteName],$about->vision??'') !!}
                                     </div>
                                     <!-- single nav content end -->
                                 </div>

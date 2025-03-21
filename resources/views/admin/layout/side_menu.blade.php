@@ -317,6 +317,28 @@
                         </a>
                     </li>
                 @endcan
+                @can('manage platform settings')
+                    <li class="menu-item">
+                        <a href="{{ route('admin.settings.home-sliders') }}" class="menu-link">
+                            <div data-i18n="Home Sliders Settings">Home Sliders Settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admin.settings.about-us') }}" class="menu-link">
+                            <div data-i18n="About Us Page">About Us Page</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admin.settings.solutions') }}" class="menu-link">
+                            <div data-i18n="Solutions Page">Solutions Page</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admin.settings.faqs') }}" class="menu-link">
+                            <div data-i18n="FAQ Page">FAQ Page</div>
+                        </a>
+                    </li>
+                @endcan
 
                 <li class="menu-item">
                     <a href="{{ route('admin.account.settings') }}" class="menu-link">
