@@ -202,7 +202,7 @@ class StaffUsers extends Component
     {
         $this->validate([
             'name'        =>['required','string','max:150'],
-            'email'       =>['required','email','unique:users,email'],
+            'email'       =>['required','email',Rule::unique('users','email')],
             'staffRole'   =>['required','string','max:100',Rule::exists('roles','name')->where('guard_name','web')],
             'password'    =>['required','string','confirmed','min:8'],
             'password_confirmation'    =>['required','string','min:8'],
@@ -219,11 +219,15 @@ class StaffUsers extends Component
         }
         DB::beginTransaction();
         try {
+
+            $google2fa = app('pragmarx.google2fa');
+
             $staff = User::create([
                 'name'=>$this->name,
                 'email' => $this->email,'password' =>!empty($this->password)?bcrypt($this->password):'123456789',
                 'role' => $this->staffRole,
-                'is_staff' => true, 'is_active' => true,'is_admin' => true
+                'is_staff' => true, 'is_active' => true,'is_admin' => true,
+                'google2fa_secret' =>$google2fa->generateSecretKey(),
             ]);
 
             if (!empty($staff)){
