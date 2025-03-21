@@ -184,6 +184,31 @@
                                 Maximum file size supported : {{ $web->file_upload_max_size/1024 }}MB
                             </small>
                         </div>
+                        <div class="mb-4 col-md-12">
+                            <label for="organization" class="form-label">Footer Section</label>
+                            <textarea
+                                type="text"
+                                class="form-control"
+                                placeholder="Footer Section"
+                                name="footer_codes"
+                                aria-label="Post title">{!! $web->footer_codes !!}</textarea>
+                            <small>
+                                Use this to inject scripts to your website footer. Take great care to ensure you are entering the right codes.
+                            </small>
+                        </div>
+
+                        <div class="mb-4 col-md-12">
+                            <label for="organization" class="form-label">Header Section</label>
+                            <textarea
+                                type="text"
+                                class="form-control"
+                                placeholder="Footer Section"
+                                name="header_codes"
+                                aria-label="Post title">{!! $web->header_codes !!}</textarea>
+                            <small>
+                                This allows you to inject codes before the closing head tag
+                            </small>
+                        </div>
                         <div class="mb-4 col-md-6">
                             <div class="form-check form-switch mb-2">
                                 <input class="form-check-input" type="checkbox" id="oemRegistration"

@@ -38,6 +38,8 @@ return new class extends Migration
             $table->longText('refund')->nullable();
             $table->longText('engineers')->nullable();
             $table->string('engineer_form')->nullable();
+            $table->longText('header_codes')->nullable();
+            $table->longText('footer_codes')->nullable();
             $table->timestamps();
         });
     }

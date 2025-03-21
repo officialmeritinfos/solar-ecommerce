@@ -162,6 +162,8 @@ class GeneralSettingsController extends BaseController
             $settings->autoReferral = $request->has('autoReferral')?1:0;
             $settings->onlinePayout = $request->has('onlinePayout')?1:0;
             $settings->checkoutPercentage = $request->input('checkoutPercentage');
+            $settings->header_codes = $request->input('header_codes');
+            $settings->footer_codes = $request->input('footer_codes');
 
             // Save the updated settings
             $settings->save();
