@@ -401,7 +401,7 @@ class StaffUsers extends Component
             $staff = User::findOrFail($roleId);
 
             // Delete the staff
-            $staff->delete();
+            $staff->forceDelete();
 
             //record activity
             StaffActivityLog::create([
